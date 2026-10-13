@@ -1,0 +1,113 @@
+:root{
+  --bg:#E9EEF0; --panel:#FFFFFF; --ink:#16313A; --muted:#5B7078; --line:#D3DDE0;
+  --pine:#2F6F62; --pine-ink:#FFFFFF; --pine-soft:#DCEBE6; --marigold:#F2B33D; --user:#16313A; --user-ink:#F2F6F7;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0F1E23; --panel:#16292F; --ink:#E4EDEF; --muted:#93A7AD; --line:#27424A;
+  --pine:#5FB3A0; --pine-ink:#0F1E23; --pine-soft:#1E3A37; --marigold:#E9A92E; --user:#E4EDEF; --user-ink:#0F1E23;
+}}
+:root[data-theme="dark"]{
+  --bg:#0F1E23; --panel:#16292F; --ink:#E4EDEF; --muted:#93A7AD; --line:#27424A;
+  --pine:#5FB3A0; --pine-ink:#0F1E23; --pine-soft:#1E3A37; --marigold:#E9A92E; --user:#E4EDEF; --user-ink:#0F1E23;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+.app{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:0;max-width:1240px;margin:0 auto}
+.chat{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line)}
+header{padding:20px 24px 14px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line)}
+.mark{width:40px;height:40px;border-radius:12px;background:var(--pine);color:var(--pine-ink);display:grid;place-items:center;font:700 20px "Bricolage Grotesque",Figtree,sans-serif;flex:none}
+header h1{margin:0;font:700 1.3rem/1.1 "Bricolage Grotesque",Figtree,sans-serif;letter-spacing:-.01em}
+header p{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+.status{margin-left:auto;font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.dot.on{background:var(--pine)}
+#log{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:14px}
+.welcome{max-width:560px}
+.welcome h2{font:700 clamp(1.7rem,4vw,2.4rem)/1.08 "Bricolage Grotesque",Figtree,sans-serif;letter-spacing:-.02em;margin:8px 0 10px}
+.welcome p{color:var(--muted);margin:0 0 18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 14px;cursor:pointer;font-size:.92rem}
+.chip:hover{border-color:var(--pine)}
+.msg{max-width:min(620px,88%);padding:11px 15px;border-radius:16px;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.user{align-self:flex-end;background:var(--user);color:var(--user-ink);border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:var(--panel);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg img{display:block;max-width:220px;max-height:200px;border-radius:10px;margin-bottom:8px}
+.msg .seen{display:block;margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);font-size:.86rem;color:var(--muted)}
+.msg.thinking{color:var(--muted);font-style:italic}
+.msg.err{border-color:#C9573F;color:inherit}
+.inline-picks{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.inline-picks span{font-size:.8rem;background:var(--pine-soft);border-radius:6px;padding:3px 8px}
+.composer{border-top:1px solid var(--line);padding:12px 16px 16px;background:var(--bg)}
+.preview{display:none;align-items:center;gap:10px;margin-bottom:10px;font-size:.88rem;color:var(--muted)}
+.preview.show{display:flex}
+.preview img{width:52px;height:52px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.preview button{border:0;background:none;color:var(--pine);cursor:pointer;text-decoration:underline}
+.row{display:flex;gap:8px;align-items:flex-end;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:6px}
+.row:focus-within{border-color:var(--pine)}
+textarea{flex:1;border:0;background:transparent;resize:none;padding:8px 6px;max-height:140px;min-height:40px;outline:none}
+.icon{width:40px;height:40px;border-radius:12px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--muted);flex:none}
+.icon:hover{background:var(--pine-soft);color:var(--ink)}
+.send{height:40px;border-radius:12px;border:0;background:var(--pine);color:var(--pine-ink);padding:0 16px;font-weight:600;cursor:pointer;flex:none}
+.send:disabled{opacity:.5;cursor:default}
+.hint{font-size:.78rem;color:var(--muted);margin:8px 4px 0}
+aside{display:flex;flex-direction:column;min-height:0;background:var(--panel)}
+aside .head{padding:22px 20px 12px;border-bottom:1px solid var(--line)}
+aside h3{margin:0;font:700 1.1rem "Bricolage Grotesque",Figtree,sans-serif}
+aside .head p{margin:4px 0 0;font-size:.85rem;color:var(--muted)}
+#shelf{flex:1;overflow-y:auto;padding:14px 16px 20px;display:flex;flex-direction:column;gap:12px}
+.empty{color:var(--muted);font-size:.9rem;padding:8px 4px}
+.prod{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg);position:relative}
+.prod .brand{font-size:.8rem;color:var(--muted)}
+.prod h4{margin:2px 0 6px;font:600 1rem/1.25 Figtree,sans-serif;padding-right:70px}
+.prod .price{position:absolute;top:12px;right:12px;background:var(--marigold);color:#2A1E05;font-weight:600;font-size:.82rem;border-radius:8px;padding:3px 8px}
+.prod p{margin:0 0 10px;font-size:.88rem}
+.prod .acts{display:flex;gap:10px;font-size:.85rem}
+.prod a{color:var(--pine);font-weight:600}
+.prod .stock{font-size:.8rem;color:var(--muted);margin:0 0 8px}
+.prod .stock.low{color:#B5651D;font-weight:600}
+.prod button.ask{border:0;background:none;padding:0;color:var(--pine);font-weight:600;cursor:pointer;font-size:.85rem}
+.prod.new{animation:land .5s ease-out}
+@keyframes land{from{transform:translateY(-6px);box-shadow:0 0 0 3px var(--marigold)}to{transform:none;box-shadow:0 0 0 0 transparent}}
+.note{font-size:.76rem;color:var(--muted);padding:10px 20px 16px;border-top:1px solid var(--line)}
+.clear{border:0;background:none;color:var(--muted);cursor:pointer;font-size:.82rem;text-decoration:underline;padding:0;margin-top:6px}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}
+  .chat{border-right:0}
+  aside{max-height:38vh;border-top:1px solid var(--line)}
+  aside .head{padding:12px 16px 8px}
+  #shelf{flex-direction:row;overflow-x:auto;overflow-y:hidden;padding:10px 16px}
+  .prod{min-width:250px;max-width:270px}
+  .note{display:none}
+  header{padding:14px 16px 10px}
+  #log{padding:16px}
+  .status span{display:none}
+}
+@media (prefers-reduced-motion:reduce){.prod.new{animation:none}}
+
+/* ---------- mode banner ---------- */
+.mode{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 24px;font-size:.86rem;background:var(--pine-soft);border-bottom:1px solid var(--line)}
+.mode.demo{background:#FBEFD5;color:#4A3305}
+.mode b{font-weight:600}
+.mode button{margin-left:auto;border:1px solid currentColor;background:transparent;border-radius:999px;padding:4px 12px;cursor:pointer;font-size:.82rem;font-weight:600}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .mode.demo{background:#3A2E12;color:#F5DFAE} }
+:root[data-theme="dark"] .mode.demo{background:#3A2E12;color:#F5DFAE}
+/* ---------- settings dialog ---------- */
+dialog{border:1px solid var(--line);border-radius:16px;padding:0;max-width:min(460px,92vw);width:100%;background:var(--panel);color:var(--ink)}
+dialog::backdrop{background:rgba(10,25,30,.45)}
+dialog form{padding:22px}
+dialog h3{margin:0 0 6px;font:700 1.2rem "Bricolage Grotesque",Figtree,sans-serif}
+dialog p{margin:0 0 14px;font-size:.88rem;color:var(--muted)}
+dialog label{display:block;font-weight:600;font-size:.9rem;margin:12px 0 6px}
+dialog input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+dialog .btns{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+dialog .btns button{border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;border:1px solid var(--line);background:transparent}
+dialog .btns .primary{background:var(--pine);color:var(--pine-ink);border-color:var(--pine)}
+dialog .btns .danger{margin-right:auto;color:#B03A2E;border-color:transparent;padding-left:0}
+dialog small{display:block;font-size:.8rem;color:var(--muted);margin-top:6px}
+dialog a{color:var(--pine)}
+@media (max-width:860px){.mode{padding:8px 16px}}

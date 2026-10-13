@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Support Desk: AI customer support chatbot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <section class="chat" aria-label="Support chat">
+    <header>
+      <div class="mark" aria-hidden="true">S</div>
+      <div>
+        <h1>AI ChatBot Support</h1>
+        <p>Help with orders, product questions and picks</p>
+      </div>
+      <div class="status"><i class="dot" id="dot"></i><span id="statusText">Connecting…</span></div>
+    </header>
+    <div class="mode demo" id="mode" role="status">
+      <span id="modeText"><b>Demo mode:</b> scripted answers, no AI and no cost. Add your own Claude API key to use the real AI.</span>
+      <button type="button" id="modeBtn">Add API key</button>
+    </div>
+
+    <div id="log" aria-live="polite">
+      <div class="welcome" id="welcome">
+        <h2>Hi, what can we help you with today?</h2>
+        <p>Describe a problem, ask about a product, or send a photo — a broken part, a label, a product you want to match — and the assistant will take a look.</p>
+        <div class="chips">
+          <button class="chip" data-q="I need some headphones.">Find me headphones</button>
+          <button class="chip" data-q="I need a new laptop.">Find me a laptop</button>
+          <button class="chip" data-q="My kettle arrived with a cracked lid.">My order arrived damaged</button>
+          <button class="chip" data-q="What coffee machines do you sell?">Browse coffee machines</button>
+          <button class="chip" data-photo="1">Identify a product from a photo</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="composer">
+      <div class="preview" id="preview">
+        <img id="previewImg" alt="Attached photo">
+        <span id="previewName"></span>
+        <button type="button" id="removeImg">Remove</button>
+      </div>
+      <div class="row">
+        <button class="icon" id="attach" type="button" aria-label="Attach a photo" title="Attach a photo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="3"/><circle cx="12" cy="12.5" r="3.5"/><path d="M8 5l1.5-2h5L16 5"/></svg>
+        </button>
+        <input type="file" id="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+        <textarea id="box" rows="1" placeholder="Type your question…" aria-label="Your message"></textarea>
+        <button class="send" id="send" type="button">Send</button>
+      </div>
+      <p class="hint" id="hint">Enter to send, Shift+Enter for a new line.</p>
+    </div>
+  </section>
+
+  <aside aria-label="Recommended products">
+    <div class="head">
+      <h3>Recommended for you</h3>
+      <p>Picks from our catalog, matched to your needs.</p>
+      <button class="clear" id="clearShelf" type="button" hidden>Clear list</button>
+    </div>
+    <div id="shelf"><p class="empty" id="emptyShelf">Tell the assistant what you need. It will ask a couple of quick questions, then suggest items from the store's catalog.</p></div>
+    <p class="note">Prices and stock come from the store's catalog. The assistant only recommends items the store sells.</p>
+  </aside>
+</div>
+
+<dialog id="settings">
+  <form method="dialog" id="settingsForm">
+    <h3>Use the real AI</h3>
+    <p>Paste your own Claude API key. It's saved only in this browser and sent only to Anthropic. You pay for your own usage; nobody else can see or use your key.</p>
+    <label for="keyInput">Claude API key</label>
+    <input id="keyInput" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-...">
+    <small>Get one at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>. Don't save a key on a shared computer.</small>
+    <label for="modelInput">Model</label>
+    <input id="modelInput" type="text" autocomplete="off" spellcheck="false">
+    <div class="btns">
+      <button type="button" class="danger" id="removeKey">Remove key</button>
+      <button type="button" id="cancelSettings">Cancel</button>
+      <button type="submit" class="primary" id="saveKey">Save key</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="catalog.js"></script>
+<script src="prompt.js"></script>
+<script src="demo.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
