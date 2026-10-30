@@ -10,24 +10,29 @@ It runs entirely in the browser, so it can be hosted for free on GitHub Pages. N
 
 ## Two modes
 
-Demo mode | Live AI mode 
-| How to use | Works straight away | Click **Add API key** and paste your own Claude API key |
-| Answers come from | Pre-written logic in `demo.js` | Claude, with the rules in `prompt.js` |
-| Understands | Common requests (headphones, laptops, vacuums, coffee machines, damaged items, returns...) | Anything |
-| Photos | Not analysed | Identifies products, reads labels, spots damage |
-| Cost | Free | Billed to the visitor's own Anthropic account |
+Demo mode / Live AI mode 
+- How to use
+- Works straight away
+- Click **Add API key** and paste your own Claude API key 
+- Answers come from | Pre-written logic in `demo.js`
+- Claude, with the rules in `prompt.js`
+- Understands Common requests (headphones, laptops, vacuums, coffee machines, damaged items, returns...) Anything
+- Photos not analysed
+- Identifies products, reads labels, spots damage 
+- Cost
+- Billed to the visitor's own Anthropic account 
 
 Every visitor uses their own key. If you host this page, nobody can use your key or run up your bill.
 
 ## Project structure 
 
-File | What it does |
-| `index.html` | The page layout |
-| `style.css` | Colours, fonts, dark mode and the phone layout |
-| `app.js` | Chat logic, product cards, API key settings and calls to Claude |
-| `demo.js` | The scripted demo-mode answers |
-| `prompt.js` | The AI's instructions, example conversations and reply format |
-| `catalog.js` | The store's product database |
+File / What it does 
+- `index.html` = The page layout
+- `style.css` = Colours, fonts, dark mode and the phone layout
+- `app.js` = Chat logic, product cards, API key settings and calls to Claude
+- `demo.js` = The scripted demo-mode answers
+- `prompt.js` = The AI's instructions, example conversations and reply format
+- `catalog.js` = The store's product database 
 
 ## Run it on your computer
 
